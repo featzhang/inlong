@@ -206,6 +206,7 @@
         <os.maven.plugin.version>1.6.0</os.maven.plugin.version>
         <kudu.version>1.16.0</kudu.version>
         <tomcat.version>8.5.53</tomcat.version>
+        <poi.version>3.16</poi.version>
     </properties>
 
     <dependencyManagement>
@@ -1537,6 +1538,11 @@
                 <groupId>io.fabric8</groupId>
                 <artifactId>kubernetes-client</artifactId>
                 <version>${kubernetes.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

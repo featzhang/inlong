@@ -17,6 +17,10 @@
 
 package org.apache.inlong.manager.common.consts;
 
+import com.google.common.collect.Sets;
+
+import java.util.Set;
+
 /**
  * Global constant for the Inlong system.
  */
@@ -150,7 +154,11 @@ public class InlongConstants {
 
     public static final String STATEMENT_TYPE_SQL = "sql";
     public static final String STATEMENT_TYPE_JSON = "json";
+    public static final String STATEMENT_TYPE_excel = "excel";
 
     public static final String SORT_TYPE_INFO_SUFFIX = "TypeInfo";
+
+    public static final Set<String> STREAM_FIELD_TYPES =
+            Sets.newHashSet("string", "int", "long", "float", "double", "date", "timestamp");
 
 }

@@ -31,6 +31,7 @@ import org.apache.inlong.manager.common.enums.StreamStatus;
 import org.apache.inlong.manager.common.exceptions.BusinessException;
 import org.apache.inlong.manager.common.util.CommonBeanUtils;
 import org.apache.inlong.manager.common.util.Preconditions;
+import org.apache.inlong.manager.common.tool.excel.ExcelTool;
 import org.apache.inlong.manager.dao.entity.InlongGroupEntity;
 import org.apache.inlong.manager.dao.entity.InlongStreamEntity;
 import org.apache.inlong.manager.dao.entity.InlongStreamExtEntity;
@@ -47,6 +48,7 @@ import org.apache.inlong.manager.pojo.sink.SinkBriefInfo;
 import org.apache.inlong.manager.pojo.sink.StreamSink;
 import org.apache.inlong.manager.pojo.sort.util.FieldInfoUtils;
 import org.apache.inlong.manager.pojo.source.StreamSource;
+
 import org.apache.inlong.manager.pojo.stream.InlongStreamApproveRequest;
 import org.apache.inlong.manager.pojo.stream.InlongStreamBriefInfo;
 import org.apache.inlong.manager.pojo.stream.InlongStreamExtInfo;
@@ -72,6 +74,10 @@ import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.create.table.ColDataType;
 import net.sf.jsqlparser.statement.create.table.ColumnDefinition;
 import net.sf.jsqlparser.statement.create.table.CreateTable;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -748,6 +754,27 @@ public class InlongStreamServiceImpl implements InlongStreamService {
             throw new BusinessException(ErrorCodeEnum.INVALID_PARAMETER,
                     String.format("parse stream fields error : %s", e.getMessage()));
         }
+    }
+
+    @Override
+    public List<StreamField> parseFields(MultipartFile file) {
+        InputStream inputStream;
+        try {
+            inputStream = file.getInputStream();
+        } catch (IOException e) {
+            throw new BusinessException(ErrorCodeEnum.INVALID_PARAMETER, "Can not properly read update file");
+        }
+        List<StreamField> data = null;
+        try {
+            data = ExcelTool.read(inputStream, StreamField.class);
+        } catch (IOException | IllegalAccessException | InstantiationException e) {
+            throw new BusinessException(ErrorCodeEnum.INVALID_PARAMETER,
+                    "Can not properly parse excel, message: " + e.getMessage());
+        }
+        if (CollectionUtils.isEmpty(data)) {
+            throw new BusinessException(ErrorCodeEnum.INVALID_PARAMETER, "The upload file is empty, please check");
+        }
+        return data;
     }
 
     private Map<String, String> parseFieldsBySql(String sql) throws JSQLParserException {
