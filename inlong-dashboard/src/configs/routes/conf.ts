@@ -80,6 +80,10 @@ const conf: RouteProps[] = [
     component: () => import('@/ui/pages/ProcessManagement'),
   },
   {
+    path: '/sort',
+    component: () => import('src/ui/pages/SortDetail'),
+  },
+  {
     path: '/clusters',
     component: () => import('@/ui/pages/Clusters'),
     childRoutes: [

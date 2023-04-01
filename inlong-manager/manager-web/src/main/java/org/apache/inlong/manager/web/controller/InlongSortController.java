@@ -24,6 +24,7 @@ import org.apache.inlong.manager.pojo.sort.SortStatusRequest;
 import org.apache.inlong.manager.pojo.sort.SortStatusInfo;
 import org.apache.inlong.manager.service.core.SortService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,12 @@ public class InlongSortController {
     @PostMapping(value = "/sort/listStatus")
     @ApiOperation(value = "List sort job status")
     public Response<List<SortStatusInfo>> listSortStatus(@RequestBody SortStatusRequest request) {
+        return Response.success(sortService.listSortStatus(request));
+    }
+
+    @GetMapping(value = "/sort/conf")
+    @ApiOperation(value = "List sort job status")
+    public Response<List<SortStatusInfo>> getConf(@RequestBody SortStatusRequest request) {
         return Response.success(sortService.listSortStatus(request));
     }
 

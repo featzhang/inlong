@@ -62,6 +62,10 @@ const conf: MenuItemType[] = [
         path: '/approval',
         name: i18n.t('configs.menus.ProcessManagement'),
       },
+      {
+        path: '/sort',
+        name: i18n.t('configs.menus.SortManagement'),
+      },
     ],
   },
 ];

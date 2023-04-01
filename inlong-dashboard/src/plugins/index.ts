@@ -43,7 +43,6 @@ export interface UseLoadMetaResult<T> {
 }
 
 export type MetaTypeKeys = 'consume' | 'group' | 'cluster' | 'node' | 'stream' | 'source' | 'sink';
-
 const metasMap: Record<MetaTypeKeys, [MetaExportWithBackendList<any>, string?]> = {
   consume: [consumes, defaultConsume],
   group: [groups, defaultGroup],
