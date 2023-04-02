@@ -17,13 +17,18 @@
  * under the License.
  */
 
-import { clusterLoader } from '@/loaders';
-import { allDefaultSorts } from './defaults';
-import { allExtendsSorts } from './extends';
-import type { SortMetaType } from './types';
+import type { MetaExportWithBackendList } from '@/plugins/types';
+import type { SortMetaType } from '../types';
 
-export type { SortMetaType };
-
-export const sorts = clusterLoader.loadPluginList<SortMetaType>(allDefaultSorts, allExtendsSorts);
-
-export const defaultValue = clusterLoader.loadDefaultPlugin<SortMetaType>(sorts);
+export const allDefaultSorts: MetaExportWithBackendList<SortMetaType> = [
+  {
+    label: 'ALL',
+    value: '',
+    LoadEntity: () => import('../common/SortInfo').then(r => ({ default: r.SortInfo })),
+  },
+  {
+    label: 'FlinkSort',
+    value: 'FLINKSORT',
+    LoadEntity: () => import('./FlinkSort'),
+  },
+];

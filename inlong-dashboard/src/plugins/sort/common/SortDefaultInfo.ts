@@ -21,7 +21,8 @@ import { DataWithBackend } from '@/plugins/DataWithBackend';
 import { RenderRow } from '@/plugins/RenderRow';
 import { RenderList } from '@/plugins/RenderList';
 import UserSelect from '@/ui/components/UserSelect';
-import { nodes, defaultValue } from '..';
+import { sorts, defaultValue } from '..';
+import { nodes } from '@/plugins/nodes';
 
 const { I18nMap, I18n } = DataWithBackend;
 const { FieldList, FieldDecorator } = RenderRow;
@@ -43,7 +44,7 @@ export class SortDefaultInfo implements DataWithBackend, RenderRow, RenderList {
     }),
   })
   @ColumnDecorator()
-  @I18n('meta.Nodes.Name')
+  @I18n('meta.Sort.Name')
   name: string;
 
   @FieldDecorator({
@@ -63,8 +64,21 @@ export class SortDefaultInfo implements DataWithBackend, RenderRow, RenderList {
   @ColumnDecorator({
     render: type => nodes.find(c => c.value === type)?.label || type,
   })
-  @I18n('meta.Nodes.Type')
+  @I18n('meta.Sort.Type')
   type: string;
+
+  @FieldDecorator({
+    type: 'input',
+    rules: [{ required: true }],
+    initialValue: '127.0.0.1:10081',
+    props: values => ({
+      maxLength: 512,
+      disabled: Boolean(values.id),
+    }),
+  })
+  @ColumnDecorator()
+  @I18n('meta.Sort.AuditProxy')
+  auditProxy: string;
 
   @FieldDecorator({
     type: UserSelect,
@@ -75,10 +89,8 @@ export class SortDefaultInfo implements DataWithBackend, RenderRow, RenderList {
     },
   })
   @ColumnDecorator()
-  @I18n('meta.Nodes.Owners')
+  @I18n('meta.Sort.InCharges')
   inCharges: string;
-
-  clusterTags: string;
 
   @FieldDecorator({
     type: 'textarea',
@@ -86,10 +98,8 @@ export class SortDefaultInfo implements DataWithBackend, RenderRow, RenderList {
       maxLength: 256,
     },
   })
-  @I18n('meta.Nodes.Description')
-  description?: string;
-
-  readonly version?: number;
+  @I18n('meta.Sort.Description')
+  description: string;
 
   parse(data) {
     return data;

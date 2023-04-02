@@ -17,13 +17,6 @@
  * under the License.
  */
 
-import { clusterLoader } from '@/loaders';
-import { allDefaultSorts } from './defaults';
-import { allExtendsSorts } from './extends';
-import type { SortMetaType } from './types';
+import { SortInfo } from './common/SortInfo';
 
-export type { SortMetaType };
-
-export const sorts = clusterLoader.loadPluginList<SortMetaType>(allDefaultSorts, allExtendsSorts);
-
-export const defaultValue = clusterLoader.loadDefaultPlugin<SortMetaType>(sorts);
+export type SortMetaType = typeof SortInfo;

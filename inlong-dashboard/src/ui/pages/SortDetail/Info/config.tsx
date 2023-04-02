@@ -20,9 +20,10 @@
 import { useMemo } from 'react';
 import { useLoadMeta, ConsumeMetaType } from '@/plugins';
 import { excludeObjectArray } from '@/core/utils';
+import { SortMetaType } from '@/plugins/sort';
 
 export const useFormContent = ({ mqType, editing }) => {
-  const { Entity } = useLoadMeta<ConsumeMetaType>('consume', mqType);
+  const { Entity } = useLoadMeta<SortMetaType>('sort', mqType);
 
   const entityFields = useMemo(() => {
     return Entity ? new Entity().renderRow() : [];
