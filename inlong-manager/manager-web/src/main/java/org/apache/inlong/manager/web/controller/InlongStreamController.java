@@ -213,9 +213,8 @@ public class InlongStreamController {
         try {
             ServletOutputStream outputStream = response.getOutputStream();
             ExcelTool.write2Excel(StreamField.class, null, outputStream);
-
         } catch (IOException | InstantiationException | IllegalAccessException e) {
-            log.error("", e);
+            log.error("Can not properly download fieldsImportTemplate", e);
         }
     }
 
