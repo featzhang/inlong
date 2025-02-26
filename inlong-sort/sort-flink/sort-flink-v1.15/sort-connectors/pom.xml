@@ -46,6 +46,7 @@
         <module>redis</module>
         <module>jdbc</module>
         <module>elasticsearch-base</module>
+        <module>paimon</module>
     </modules>
 
     <properties>

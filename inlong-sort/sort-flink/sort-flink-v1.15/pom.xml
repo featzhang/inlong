@@ -56,6 +56,7 @@
         <thrift.version>0.9.3</thrift.version>
         <kafka-clients.version>2.7.2</kafka-clients.version>
         <flink-connector-debezium.version>2.3.0</flink-connector-debezium.version>
+        <flink.paimon.version>1.0.1</flink.paimon.version>
     </properties>
 
     <dependencyManagement>
@@ -143,6 +144,22 @@
                 <groupId>com.microsoft.sqlserver</groupId>
                 <artifactId>mssql-jdbc</artifactId>
                 <version>${sqlserver.jdbc.version}</version>
+            </dependency>
+            <!-- paimon -->
+            <dependency>
+                <groupId>org.apache.paimon</groupId>
+                <artifactId>paimon-flink-1.15</artifactId>
+                <version>${flink.paimon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.paimon</groupId>
+                <artifactId>paimon-bundle</artifactId>
+                <version>${flink.paimon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.paimon</groupId>
+                <artifactId>paimon-common</artifactId>
+                <version>${flink.paimon.version}</version>
             </dependency>
 
             <!-- flink -->
